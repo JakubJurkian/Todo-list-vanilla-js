@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -19,7 +20,7 @@ main {
 
 header {
   margin-bottom: 24px;
-  font-size: 24px;
+  font-size: 32px;
 }
 
 .section-todo-creation {
@@ -180,9 +181,13 @@ img {
   display: none;
 }
 
+.empty-todo-list-text {
+  text-align: center;
+}
+
 @media (min-width: 425px) {
   .section-todo-production--list-item-text {
-    font-size: 22px;
+    font-size: 18px;
   }
   .section-todo-creation--form-input {
     font-size: 22px;
@@ -231,7 +236,7 @@ img {
     margin-bottom: 8px;
   }
   .section-todo-production--list-item-btns button {
-    padding: 20px;
+    padding: 22px;
   }
 }
 
@@ -255,21 +260,21 @@ img {
   }
   .section-todo-creation--form-input {
     width: 50%;
-    font-size: 30px;
+    font-size: 28px;
     padding: 24px;
   }
   .section-todo-creation--form-btn {
     width: auto;
     margin: 0 0 0 8px;
-    font-size: 30px;
+    font-size: 28px;
     padding: 24px;
   }
   .section-todo-production--list-item-btns button {
     padding: 28px 16px 28px 16px;
-    width: 120px;
+    width: 100px;
   }
   .section-todo-production--list-item-text {
-    font-size: 30px;
+    font-size: 28px;
   }
   .empty-todo-list-text {
     font-size: 30px;
