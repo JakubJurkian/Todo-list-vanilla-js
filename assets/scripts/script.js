@@ -19,6 +19,7 @@ const createNewTodoElement = (text) => {
   newDiv2.classList.add("section-todo-production--list-item-btns");
   newBtn1.classList.add('delete-btn');
   newBtn2.classList.add('done-btn');
+
   newImgX.src = './assets/images/x.png';
   newImgX.width = '24';
   newImgCheckMark.src = './assets/images/check-mark.png';
@@ -31,6 +32,8 @@ const createNewTodoElement = (text) => {
   newDiv2.append(newBtn1, newBtn2);
   newLi.append(newDiv1, newDiv2);
   todoList.append(newLi);
+  
+  newLi.scrollIntoView();
 };
 
 const checkTodosAmount = () => {
@@ -42,8 +45,11 @@ const addDeleteTodoOption = () => {
   const todoListDeleteBtns = document.querySelectorAll(".delete-btn");
   for (let i = 0; i < todoListDeleteBtns.length; i++) {
     todoListDeleteBtns[i].addEventListener('click', function() {
-        this.parentNode.parentNode.remove();
-        checkTodosAmount();
+        this.parentNode.parentNode.classList.add('removed-todo');
+        setTimeout(() => {
+          this.parentNode.parentNode.remove();
+          checkTodosAmount();
+        }, 700);
     });
   }
 };
