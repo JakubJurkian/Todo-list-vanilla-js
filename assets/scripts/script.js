@@ -5,20 +5,30 @@ const emptyTodoListText = document.querySelector('.empty-todo-list-text');
 
 const createNewTodoElement = (text) => {
   const newLi = document.createElement("li");
-  newLi.classList.add("section-todo-production--list-item");
-
-  const newDiv1 = document.createElement("div");
-  const newDiv2 = document.createElement("div");
+  const newDivWithText = document.createElement("div");
+  const newDivWithBtns = document.createElement("div");
   const newH2 = document.createElement("h2");
-  const newBtn1 = document.createElement("button");
-  const newBtn2 = document.createElement("button");
+  const newDeleteBtn = document.createElement("button");
+  const newDoneBtn = document.createElement("button");
   const newImgX = document.createElement('img');
   const newImgCheckMark = document.createElement('img');
 
-  newDiv1.classList.add("section-todo-production--list-item-text");
-  newDiv2.classList.add("section-todo-production--list-item-btns");
-  newBtn1.classList.add('delete-btn');
-  newBtn2.classList.add('done-btn');
+const svgns = "http://www.w3.org/2000/svg";
+
+// let newRect = document.createElementNS(svgns, "rect");
+
+// newRect.setAttribute("x", "150");
+// newRect.setAttribute("y", "150");
+// newRect.setAttribute("width", "100");
+// newRect.setAttribute("height", "100");
+// newRect.setAttribute("fill", "#5cceee");
+// svg.append(newRect);
+
+  newLi.classList.add("section-todo-production--list-item");
+  newDivWithText.classList.add("section-todo-production--list-item-text");
+  newDivWithBtns.classList.add("section-todo-production--list-item-btns");
+  newDeleteBtn.classList.add('delete-btn');
+  newDoneBtn.classList.add('done-btn');
 
   newImgX.src = './assets/images/x.png';
   newImgX.width = '24';
@@ -26,14 +36,18 @@ const createNewTodoElement = (text) => {
   newImgCheckMark.width = '30 ';
 
   newH2.append(text);
-  newBtn1.append(newImgX);
-  newBtn2.append(newImgCheckMark);
-  newDiv1.append(newH2);
-  newDiv2.append(newBtn1, newBtn2);
-  newLi.append(newDiv1, newDiv2);
+  newDeleteBtn.append(newImgX);
+  newDoneBtn.append(newImgCheckMark);
+  newDivWithText.append(newH2);
+  newDivWithBtns.append(newDeleteBtn, newDoneBtn);
+  newLi.append(newDivWithText, newDivWithBtns);
   todoList.append(newLi);
-  
+
   newLi.scrollIntoView();
+
+  setTimeout(() => {
+    newLi.classList.add('show-todo');
+  }, 0);
 };
 
 const checkTodosAmount = () => {

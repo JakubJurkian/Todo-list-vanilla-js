@@ -89,20 +89,27 @@ header {
 .section-todo-production--list-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   margin-bottom: 8px;
   background: rgba(55, 18, 111, 0.2);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   overflow: hidden;
-  animation: expand 0.6s ease-out;
+  opacity: 0;
 }
 
 .section-todo-production--list-item-text {
-  padding: 16px;
-  font-size: 18px;
-  text-align: center;
+  padding: 24px;
+  margin-bottom: 4px;
+  font-size: 16px;
+  text-align: center; 
+  background-color: rgba(255, 255, 255, 0.045);
+}
+
+.section-todo-production--list-item-btns {
+  display: flex;
+  justify-content: space-between;
 }
 
 .section-todo-production--list-item-btns button {
@@ -113,7 +120,8 @@ header {
   height: 100%;
   margin-left: 4px;
   border-radius: 8px;
-  width: 70px;
+  /* width: 70px; */
+  width: 100%;
   transition: all 0.3s;
 }
 
@@ -127,6 +135,11 @@ header {
 
 button:hover {
   background-color: #211b59;
+}
+
+.show-todo {
+  opacity: 1;
+  transition: all 0.8s;
 }
 
 .removed-todo {
@@ -151,6 +164,10 @@ button:hover {
 
 .finished-todo .done-btn {
   display: none;
+}
+
+.finished-todo .delete-btn {
+  margin: 0;
 }
 
 .empty-todo-list-text {
@@ -218,6 +235,12 @@ img {
     justify-content: space-between;
     margin-bottom: 8px;
   }
+
+  .section-todo-production--list-item-text {
+    padding: 16px;
+    background-color: transparent;
+  }
+
   .section-todo-production--list-item-btns button {
     padding: 22px;
   }
@@ -256,7 +279,7 @@ img {
     width: 100px;
   }
   .section-todo-production--list-item-text {
-    font-size: 26px;
+    font-size: 24px;
   }
   .empty-todo-list-text {
     font-size: 30px;
