@@ -13,27 +13,16 @@ const createNewTodoElement = (text) => {
   const newImgX = document.createElement('img');
   const newImgCheckMark = document.createElement('img');
 
-const svgns = "http://www.w3.org/2000/svg";
-
-// let newRect = document.createElementNS(svgns, "rect");
-
-// newRect.setAttribute("x", "150");
-// newRect.setAttribute("y", "150");
-// newRect.setAttribute("width", "100");
-// newRect.setAttribute("height", "100");
-// newRect.setAttribute("fill", "#5cceee");
-// svg.append(newRect);
-
   newLi.classList.add("section-todo-production--list-item");
   newDivWithText.classList.add("section-todo-production--list-item-text");
   newDivWithBtns.classList.add("section-todo-production--list-item-btns");
   newDeleteBtn.classList.add('delete-btn');
   newDoneBtn.classList.add('done-btn');
 
-  newImgX.src = './assets/images/x.png';
+  newImgX.src = './assets/images/x.svg';
   newImgX.width = '24';
-  newImgCheckMark.src = './assets/images/check-mark.png';
-  newImgCheckMark.width = '30 ';
+  newImgCheckMark.src = './assets/images/check-mark.svg';
+  newImgCheckMark.width = '24';
 
   newH2.append(text);
   newDeleteBtn.append(newImgX);
@@ -81,9 +70,9 @@ formBtn.addEventListener("click", (event) => {
   event.preventDefault();
   if (!formInput.value) return;
   const todoText = formInput.value;
+  formInput.value = "";
   emptyTodoListText.classList.add('invisible');
   createNewTodoElement(todoText);
-  formInput.value = "";
   addDeleteTodoOption();
   addDoneTodoOption();
 });
