@@ -2,6 +2,7 @@ const formBtn = document.querySelector(".section-todo-creation--form-btn");
 const formInput = document.querySelector(".section-todo-creation--form-input");
 const todoList = document.querySelector(".section-todo-production--list");
 const emptyTodoListText = document.querySelector('.empty-todo-list-text');
+const todosFilter = document.querySelector('.section-todo-creation--form-select');
 
 const createNewTodoElement = (text) => {
   const newLi = document.createElement("li");
@@ -21,8 +22,10 @@ const createNewTodoElement = (text) => {
 
   newImgX.src = './assets/images/x.svg';
   newImgX.width = '24';
+  newImgX.alt = 'x';
   newImgCheckMark.src = './assets/images/check-mark.svg';
   newImgCheckMark.width = '24';
+  newImgCheckMark.alt = 'check-mark';
 
   newH2.append(text);
   newDeleteBtn.append(newImgX);
@@ -66,6 +69,34 @@ const addDoneTodoOption = () => {
   }
 };
 
+function filterTodos(event) {
+  const todos = todoList.childNodes;
+  todos.forEach(function(todo) {
+    if (todo.nodeName === "LI") {
+      switch (event.target.value) {
+        case "all-todos":
+          todo.style.display = "flex";
+          break;
+        case "done-todos":
+          if (todo.classList.contains("finished-todo")) {
+            todo.style.display = "flex";
+          } else {
+            todo.style.display = "none";
+          }
+          break;
+
+        case "undone-todos":
+          if (todo.classList.contains("finished-todo")) {
+            todo.style.display = "none";
+          } else {
+            todo.style.display = "flex";
+          }
+          break;
+      }
+    }
+  });
+}
+
 formBtn.addEventListener("click", (event) => {
   event.preventDefault();
   if (!formInput.value) return;
@@ -76,3 +107,7 @@ formBtn.addEventListener("click", (event) => {
   addDeleteTodoOption();
   addDoneTodoOption();
 });
+
+todosFilter.addEventListener('change', filterTodos);
+
+

@@ -76,6 +76,19 @@ header {
   transform: scale(0.98);
 }
 
+.section-todo-creation--form-select {
+  padding: 12px;
+  font-size: 24px;
+  border-radius: 8px;
+  color: black;
+  margin: 8px 0 0 0;
+  width: 100%;
+}
+
+.section-todo-creation--form-select option {
+  color: inherit;
+}
+
 .section-todo-production {
   padding: 32px 4px;
   border-radius: 8px;
@@ -245,6 +258,10 @@ img {
   .section-todo-production--list-item-btns button {
     padding: 22px;
   }
+  .section-todo-creation--form-select {
+    margin: 0 0 0 8px;
+    width: auto;
+  }
 }
 
 @media (min-width: 768px) {
@@ -275,6 +292,11 @@ img {
     font-size: 26px;
     padding: 24px;
   }
+
+  .section-todo-creation--form-select {
+    padding: 22px;
+  }
+
   .section-todo-production--list-item-btns button {
     padding: 28px 16px 28px 16px;
     width: 100px;
