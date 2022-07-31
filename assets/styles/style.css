@@ -69,14 +69,6 @@ header {
   transition: all 0.3s;
 }
 
-.section-todo-creation--form-btn:hover {
-  transform: scale(1.03);
-}
-
-.section-todo-creation--form-btn:active {
-  transform: scale(0.98);
-}
-
 .section-todo-filter {
   padding: 16px 4px;
   margin-bottom: 0px;
@@ -153,10 +145,12 @@ header {
   cursor: pointer;
 }
 
+.section-todo-creation--form-btn:hover,
 .section-todo-production--list-item-btns button:hover {
   transform: scale(1.03);
 }
 
+.section-todo-creation--form-btn:active,
 .section-todo-production--list-item-btns button:active {
   transform: scale(0.98);
 }
@@ -299,7 +293,7 @@ img {
     padding: 22px;
   }
   .section-todo-filter--form-select {
-    margin: 0 0 0 0;
+    margin: 0;
   }
 
   .input-paragraph {
