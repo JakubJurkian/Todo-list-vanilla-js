@@ -11,7 +11,7 @@ body {
 }
 
 main {
-  margin-top: 1rem;
+  margin-top: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +19,17 @@ main {
 
 header {
   margin-bottom: 24px;
-  font-size: 32px;
+  font-size: 2rem;
+}
+
+.section-todo-creation,
+.section-todo-filter,
+.section-todo-production {
+  width: 100%;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 
 .section-todo-creation {
@@ -27,16 +37,7 @@ header {
   justify-content: center;
   padding: 32px 0;
   border-radius: 16px;
-  margin-bottom: 16px;
-}
-
-.section-todo-creation,
-.section-todo-production {
-  width: 100%;
-  backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  margin-bottom: 8px;
 }
 
 .section-todo-creation--form {
@@ -76,17 +77,20 @@ header {
   transform: scale(0.98);
 }
 
-.section-todo-production {
-  padding: 32px 4px;
+.section-todo-filter {
+  padding: 16px 4px;
+  margin-bottom: 0px;
   border-radius: 8px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: none;
 }
 
-.section-todo-production--form-select {
+.section-todo-filter--form-select {
   padding: 12px;
   font-size: 22px;
   border-radius: 8px;
   color: white;
-  margin: 0 0 16px 0;
   width: 100%;
   outline: none;
   backdrop-filter: blur(20px);
@@ -95,8 +99,16 @@ header {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 
-.section-todo-production--form-select option {
+.section-todo-filter--form-select option {
   color: inherit;
+}
+
+.section-todo-production {
+  padding: 32px 4px;
+  border-radius: 8px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: none;
 }
 
 .section-todo-production--list {
@@ -107,12 +119,12 @@ header {
 .section-todo-production--list-item {
   display: flex;
   flex-direction: column;
-  margin-bottom: 8px;
   background: rgba(31, 38, 135, 0.37);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
   overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 8px;
   opacity: 0;
 }
 
@@ -120,8 +132,8 @@ header {
   padding: 24px;
   margin-bottom: 4px;
   font-size: 16px;
-  text-align: center;
   background-color: rgba(255, 255, 255, 0.045);
+  text-align: center;
   word-wrap: break-word;
 }
 
@@ -132,14 +144,13 @@ header {
 
 .section-todo-production--list-item-btns button {
   padding: 16px;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  transition: all 0.3s;
   background-color: #24243e;
   border: none;
   cursor: pointer;
-  height: 100%;
-  margin-left: 4px;
-  border-radius: 8px;
-  width: 100%;
-  transition: all 0.3s;
 }
 
 .section-todo-production--list-item-btns button:hover {
@@ -152,6 +163,10 @@ header {
 
 button:hover {
   background-color: #211b59;
+}
+
+.done-btn {
+  margin-left: 4px;
 }
 
 .show-todo {
@@ -192,16 +207,20 @@ button:hover {
   font-size: 20px;
 }
 
-img {
-  filter: contrast(1%);
+.input-paragraph {
+  margin: 4px 0;
+  font-size: 20px;
+  display: none;
 }
 
-@keyframes expand {
-  from {
-    transform: scale(0);
-    opacity: 0;
-    background: #5470b0;
-  }
+.error-text {
+  display: block;
+  color: red;
+  font-weight: bold;
+}
+
+img {
+  filter: contrast(1%);
 }
 
 @media (min-width: 425px) {
@@ -219,6 +238,7 @@ img {
 
 @media (min-width: 598px) {
   .section-todo-creation,
+  .section-todo-filter,
   .section-todo-production {
     width: 598px;
   }
@@ -231,9 +251,22 @@ img {
     width: 55%;
   }
   .section-todo-creation--form-btn {
-    width: auto;
+    width: 30%;
     margin: 0 0 0 8px;
-    padding: 18px;
+    padding: 19px;
+  }
+
+  .section-todo-filter {
+    display: flex;
+    justify-content: center;
+  }
+
+  .section-todo-filter--form {
+    width: 450px;
+  }
+
+  .section-todo-filter--form-select {
+    font-size: 18px;
   }
 
   .section-todo-production {
@@ -243,24 +276,9 @@ img {
     align-items: center;
   }
 
-  .section-todo-production--form {
-    width: 160px;
-    position: absolute;
-    right: 16px;
-    top: 16px;
-  }
-
-  .section-todo-production--form-select {
-    font-size: 18px;
-  }
-
   .section-todo-production--list {
     list-style: none;
     width: 90%;
-  }
-
-  .section-todo-production--list-item:first-of-type {
-    margin-top: 3.5rem;
   }
 
   .section-todo-production--list-item {
@@ -280,28 +298,43 @@ img {
   .section-todo-production--list-item-btns button {
     padding: 22px;
   }
-  .section-todo-production--form-select {
+  .section-todo-filter--form-select {
     margin: 0 0 0 0;
+  }
+
+  .input-paragraph {
+    position: absolute;
+    bottom: 0;
+    left: 120px;
+    margin: 4px 0;
+    font-size: 20px;
   }
 }
 
 @media (min-width: 768px) {
   .section-todo-creation,
+  .section-todo-filter,
   .section-todo-production {
     width: 750px;
   }
-  .section-todo-production--form {
-    width: 200px;
+  .section-todo-filter--form {
+    width: 550px;
   }
 
-  .section-todo-production--form-select {
+  .section-todo-filter--form-select {
     font-size: 20px;
+  }
+
+  .input-paragraph {
+    left: 160px;
+    font-size: 22px;
   }
 }
 
 @media (min-width: 1024px) {
   .section-todo-creation,
-  .section-todo-production {
+  .section-todo-production,
+  .section-todo-filter {
     width: 1008px;
   }
 
@@ -312,31 +345,26 @@ img {
   .section-todo-creation--form-input {
     width: 50%;
     font-size: 26px;
-    padding: 24px;
+    padding: 20px;
   }
   .section-todo-creation--form-btn {
-    width: auto;
+    width: 25%;
     margin: 0 0 0 8px;
-    font-size: 26px;
-    padding: 24px;
+    font-size: 24px;
+    padding: 22px;
   }
 
   .section-todo-creation--form-select {
     padding: 22px;
   }
 
-  .section-todo-production--form {
-    width: 300px;
+  .section-todo-filter--form {
+    width: 700px;
   }
 
-  .section-todo-production--form-select {
-    width: 300px;
+  .section-todo-filter--form-select {
     padding: 16px;
     font-size: 22px;
-  }
-
-  .section-todo-production--list-item:first-of-type {
-    margin-top: 4rem;
   }
 
   .section-todo-production--list-item-btns button {
@@ -348,5 +376,9 @@ img {
   }
   .empty-todo-list-text {
     font-size: 26px;
+  }
+  .input-paragraph {
+    left: 280px;
+    font-size: 24px;
   }
 }

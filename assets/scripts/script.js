@@ -1,8 +1,9 @@
-const formBtn = document.querySelector(".section-todo-creation--form-btn");
 const formInput = document.querySelector(".section-todo-creation--form-input");
+const formBtn = document.querySelector(".section-todo-creation--form-btn");
+const todosFilter = document.querySelector('.section-todo-filter--form-select');
 const todoList = document.querySelector(".section-todo-production--list");
 const emptyTodoListText = document.querySelector('.empty-todo-list-text');
-const todosFilter = document.querySelector('.section-todo-production--form-select');
+const errorParagraph = document.querySelector('.input-paragraph');
 
 const createNewTodoElement = (text) => {
   const newLi = document.createElement("li");
@@ -71,7 +72,7 @@ const addDoneTodoOption = () => {
 
 function filterTodos(event) {
   const todos = todoList.childNodes;
-  todos.forEach(function(todo) {
+  todos.forEach(todo => {
     if (todo.nodeName === "LI") {
       switch (event.target.value) {
         case "all-todos":
@@ -99,7 +100,10 @@ function filterTodos(event) {
 
 formBtn.addEventListener("click", (event) => {
   event.preventDefault();
-  if (!formInput.value) return;
+  if (!formInput.value.trim()) {
+    errorParagraph.classList.add('error-text');
+    return;
+  }
   const todoText = formInput.value;
   formInput.value = "";
   emptyTodoListText.classList.add('invisible');
@@ -108,6 +112,10 @@ formBtn.addEventListener("click", (event) => {
   addDoneTodoOption();
 });
 
+formInput.addEventListener('input', () => {
+  if (errorParagraph.classList.contains('error-text')) {
+    errorParagraph.classList.remove('error-text');
+  }
+});
+
 todosFilter.addEventListener('change', filterTodos);
-
-

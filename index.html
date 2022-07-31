@@ -13,6 +13,7 @@
       <header>
         <h1>Todo App</h1>
       </header>
+
       <section class="section-todo-creation">
         <form class="section-todo-creation--form">
           <input
@@ -20,32 +21,26 @@
             type="text"
             placeholder="Type to-do"
           />
+          <p class="input-paragraph">Please fill the input.</p>
           <button class="section-todo-creation--form-btn" type="submit">
             Create
           </button>
         </form>
       </section>
-      <section class="section-todo-production">
-        <form class="section-todo-production--form"> 
-          <select class="section-todo-production--form-select">
+
+      <section class="section-todo-filter">
+        <form class="section-todo-filter--form">
+          <select class="section-todo-filter--form-select">
             <option selected value="all-todos">All</option>
             <option value="done-todos">Done</option>
             <option value="undone-todos">Undone</option>
           </select>
         </form>
+      </section>
+
+      <section class="section-todo-production">
         <ul class="section-todo-production--list">
-          <!-- <li class="section-todo-production--list-item">
-                    <div class="section-todo-production--list-item-text">
-                      <h2>Do 50 push-ups</h2>
-                    </div>
-                    <div class="section-todo-production--list-item-btns">
-                      <button>Delete</button>
-                      <button>Done</button>
-                    </div>
-                </li> -->
-          <h1 class="empty-todo-list-text">
-            Add some to-do task.
-          </h1>
+          <h1 class="empty-todo-list-text">Add some to-do task.</h1>
         </ul>
       </section>
     </main>
