@@ -2,7 +2,7 @@ const formBtn = document.querySelector(".section-todo-creation--form-btn");
 const formInput = document.querySelector(".section-todo-creation--form-input");
 const todoList = document.querySelector(".section-todo-production--list");
 const emptyTodoListText = document.querySelector('.empty-todo-list-text');
-const todosFilter = document.querySelector('.section-todo-creation--form-select');
+const todosFilter = document.querySelector('.section-todo-production--form-select');
 
 const createNewTodoElement = (text) => {
   const newLi = document.createElement("li");
