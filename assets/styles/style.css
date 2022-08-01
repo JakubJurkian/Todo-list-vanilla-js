@@ -19,7 +19,7 @@ main {
 
 header {
   margin-bottom: 24px;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .section-todo-creation,
@@ -49,7 +49,7 @@ header {
 
 .section-todo-creation--form-input {
   width: 100%;
-  padding: 16px;
+  padding: 14px;
   font-size: 18px;
   border-radius: 8px;
   color: #24243e;
@@ -80,7 +80,7 @@ header {
 
 .section-todo-filter--form-select {
   padding: 12px;
-  font-size: 22px;
+  font-size: 20px;
   border-radius: 8px;
   color: white;
   width: 100%;
@@ -207,6 +207,12 @@ button:hover {
   display: none;
 }
 
+.already-exists-todo {
+  margin: 4px 0;
+  font-size: 20px;
+  display: none;
+}
+
 .error-text {
   display: block;
   color: red;
@@ -231,6 +237,9 @@ img {
 }
 
 @media (min-width: 598px) {
+  header {
+    font-size: 2rem;
+  }
   .section-todo-creation,
   .section-todo-filter,
   .section-todo-production {
@@ -242,6 +251,7 @@ img {
     justify-content: center;
   }
   .section-todo-creation--form-input {
+    padding: 16px;
     width: 55%;
   }
   .section-todo-creation--form-btn {
@@ -296,7 +306,8 @@ img {
     margin: 0;
   }
 
-  .input-paragraph {
+  .input-paragraph,
+  .already-exists-todo {
     position: absolute;
     bottom: 0;
     left: 120px;
@@ -319,7 +330,8 @@ img {
     font-size: 20px;
   }
 
-  .input-paragraph {
+  .input-paragraph,
+  .already-exists-todo {
     left: 160px;
     font-size: 22px;
   }
@@ -366,12 +378,13 @@ img {
     width: 100px;
   }
   .section-todo-production--list-item-text {
-    font-size: 22px;
+    font-size: 20px;
   }
   .empty-todo-list-text {
-    font-size: 26px;
+    font-size: 24px;
   }
-  .input-paragraph {
+  .input-paragraph,
+  .already-exists-todo {
     left: 280px;
     font-size: 24px;
   }
