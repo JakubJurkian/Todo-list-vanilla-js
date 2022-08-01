@@ -6,6 +6,8 @@ const emptyTodoListText = document.querySelector(".empty-todo-list-text");
 const errorParagraph = document.querySelector(".input-paragraph");
 const todoAlreadyExistsParagraph = document.querySelector(".already-exists-todo");
 
+localStorage.setItem("todos", "[]");
+
 const createNewTodoElement = (text) => {
   const newLi = document.createElement("li");
   const newDivWithText = document.createElement("div");
