@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo List</title>
+    <meta name="description" content="To-do list application" />
+    <meta name="keywords" content="Todo list, to-do list" />
     <link rel="stylesheet" href="./assets/styles/style.css" />
     <script src="./assets/scripts/script.js" defer></script>
   </head>
@@ -18,10 +20,9 @@
         <form class="section-todo-creation--form">
           <input
             class="section-todo-creation--form-input"
-            type="text"
-            placeholder="Type to-do"
+            type="text" placeholder="Type to-do"
           />
-          <p class="input-paragraph">Please fill the input.</p>
+          <p class="empty-input">Please fill the input.</p>
           <p class="already-exists-todo">This todo already exists.</p>
           <button class="section-todo-creation--form-btn" type="submit">
             Create
@@ -41,7 +42,7 @@
 
       <section class="section-todo-production">
         <ul class="section-todo-production--list">
-          <h1 class="empty-todo-list-text">Add some to-do task.</h1>
+          <h2 class="empty-todo-list-text">Add some to-do task.</h2>
         </ul>
       </section>
     </main>

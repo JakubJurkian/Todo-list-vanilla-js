@@ -18,7 +18,7 @@ main {
 }
 
 header {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   font-size: 1.5rem;
 }
 
@@ -47,21 +47,22 @@ header {
   width: 95%;
 }
 
-.section-todo-creation--form-input {
+.section-todo-creation--form-input,
+.section-todo-creation--form-btn {
   width: 100%;
-  padding: 14px;
   font-size: 18px;
   border-radius: 8px;
+}
+
+.section-todo-creation--form-input {
+  padding: 14px;
   color: #24243e;
   border: none;
   outline: none;
 }
 
 .section-todo-creation--form-btn {
-  width: 100%;
-  padding: 18px;
-  font-size: 18px;
-  border-radius: 8px;
+  padding: 17px;
   margin: 8px 0 0 0;
   border: none;
   cursor: pointer;
@@ -71,7 +72,6 @@ header {
 
 .section-todo-filter {
   padding: 16px 4px;
-  margin-bottom: 0px;
   border-radius: 8px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -82,8 +82,8 @@ header {
   padding: 12px;
   font-size: 20px;
   border-radius: 8px;
-  color: white;
   width: 100%;
+  color: white;
   outline: none;
   backdrop-filter: blur(20px);
   background: rgba(31, 38, 135, 0.37);
@@ -111,17 +111,17 @@ header {
 .section-todo-production--list-item {
   display: flex;
   flex-direction: column;
-  background: rgba(31, 38, 135, 0.37);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  border: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
   border-radius: 8px;
   margin-bottom: 8px;
   opacity: 0;
+  background: rgba(31, 38, 135, 0.37);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .section-todo-production--list-item-text {
-  padding: 24px;
+  padding: 20px;
   margin-bottom: 4px;
   font-size: 16px;
   background-color: rgba(255, 255, 255, 0.045);
@@ -135,7 +135,7 @@ header {
 }
 
 .section-todo-production--list-item-btns button {
-  padding: 16px;
+  padding: 12px;
   height: 100%;
   width: 100%;
   border-radius: 8px;
@@ -175,8 +175,6 @@ button:hover {
 
 .invisible {
   display: none;
-  /* opacity: 0; */
-  /* transition: all 1s; */
 }
 
 .finished-todo {
@@ -201,7 +199,7 @@ button:hover {
   font-size: 20px;
 }
 
-.input-paragraph {
+.empty-input {
   margin: 4px 0;
   font-size: 20px;
   display: none;
@@ -306,7 +304,7 @@ img {
     margin: 0;
   }
 
-  .input-paragraph,
+  .empty-input,
   .already-exists-todo {
     position: absolute;
     bottom: 0;
@@ -330,7 +328,7 @@ img {
     font-size: 20px;
   }
 
-  .input-paragraph,
+  .empty-input,
   .already-exists-todo {
     left: 160px;
     font-size: 22px;
@@ -381,9 +379,9 @@ img {
     font-size: 20px;
   }
   .empty-todo-list-text {
-    font-size: 24px;
+    font-size: 26px;
   }
-  .input-paragraph,
+  .empty-input,
   .already-exists-todo {
     left: 280px;
     font-size: 24px;
