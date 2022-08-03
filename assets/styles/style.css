@@ -295,6 +295,7 @@ img {
     padding: 16px;
     background-color: transparent;
     max-width: 70%;
+    text-align: left;
   }
 
   .section-todo-production--list-item-btns button {
