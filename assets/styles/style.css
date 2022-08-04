@@ -292,6 +292,7 @@ img {
   }
 
   .section-todo-production--list-item-text {
+    font-size: 16px;
     padding: 16px;
     background-color: transparent;
     max-width: 70%;
