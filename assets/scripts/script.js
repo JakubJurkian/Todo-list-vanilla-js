@@ -147,12 +147,23 @@ function filterTodos(event) {
   });
 }
 
-formBtn.addEventListener("click", (event) => {
+const loading = (miliseconds) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, miliseconds);
+  });
+};
+
+formBtn.addEventListener("click", async(event) => {
   event.preventDefault();
   if (!formInput.value.trim()) {
     errorParagraph.classList.add("error-text");
+    await loading(0);
+    errorParagraph.classList.add('show');
     if (todoAlreadyExistsParagraph.classList.contains("error-text")) {
       todoAlreadyExistsParagraph.classList.remove("error-text");
+      todoAlreadyExistsParagraph.classList.remove('show');
     }
     return;
   }
@@ -162,13 +173,17 @@ formBtn.addEventListener("click", (event) => {
 
   let todos = Array.from(JSON.parse(localStorage.getItem("todos")));
   let todoExists = null;
+  
   todos.forEach(todo => {
-    if (todo.text === todoText) {
-      todoAlreadyExistsParagraph.classList.add("error-text");
-      todoExists = true;
-    }
+    if (todo.text === todoText) todoExists = true;
   });
-  if(todoExists) return;
+
+  if(todoExists) {
+    todoAlreadyExistsParagraph.classList.add("error-text");
+    await loading(0);
+    todoAlreadyExistsParagraph.classList.add('show');
+    return;
+  }
 
   emptyTodoListText.classList.add("invisible");
   createNewTodoElement(todoText);
@@ -176,11 +191,15 @@ formBtn.addEventListener("click", (event) => {
   addDoneTodoOption();
 });
 
-formInput.addEventListener("input", () => {
+formInput.addEventListener("input", async() => {
   if (errorParagraph.classList.contains("error-text")) {
+    errorParagraph.classList.remove('show');
+    await loading(300);
     errorParagraph.classList.remove("error-text");
   }
   if (todoAlreadyExistsParagraph.classList.contains("error-text")) {
+    todoAlreadyExistsParagraph.classList.remove('show');
+    await loading(300);
     todoAlreadyExistsParagraph.classList.remove("error-text");
   }
 });
