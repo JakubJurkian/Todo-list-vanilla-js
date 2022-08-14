@@ -10,7 +10,7 @@ if (!localStorage.todos) {
   localStorage.setItem("todos", "[]");
 }
 
-const createNewTodoElement = (text) => {
+const createNewTodoElement = async(text) => {
   const newLi = document.createElement("li");
   const newDivWithText = document.createElement("div");
   const newDivWithBtns = document.createElement("div");
@@ -42,10 +42,7 @@ const createNewTodoElement = (text) => {
   todoList.append(newLi);
 
   newLi.scrollIntoView();
-
-  setTimeout(() => {
-    newLi.classList.add("show-todo");
-  }, 0);
+  newLi.classList.add("show-todo");
 
   localStorage.setItem("todos", JSON.stringify([...JSON.parse(localStorage.getItem("todos") || "[]"), { text: text, done: false }]));
 };
@@ -72,6 +69,14 @@ function loadTodos() {
   addDeleteTodoOption();
 }
 
+const loading = (miliseconds) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, miliseconds);
+  });
+};
+
 const checkTodosAmount = () => {
   const todos = document.querySelectorAll(".section-todo-production--list-item");
   if (todos.length === 0) emptyTodoListText.classList.remove("invisible");
@@ -81,7 +86,7 @@ const addDeleteTodoOption = () => {
   const todoListDeleteBtns = document.querySelectorAll(".delete-btn");
 
   for (let i = 0; i < todoListDeleteBtns.length; i++) {
-    todoListDeleteBtns[i].addEventListener("click", function () {
+    todoListDeleteBtns[i].addEventListener("click", async function () {
       this.parentNode.parentNode.classList.add("removed-todo");
 
       const todos = Array.from(JSON.parse(localStorage.getItem("todos")));
@@ -93,10 +98,9 @@ const addDeleteTodoOption = () => {
       });
       localStorage.setItem("todos", JSON.stringify(todos));
 
-      setTimeout(() => {
-        this.parentNode.parentNode.remove();
-        checkTodosAmount();
-      }, 700);
+      await loading(750);
+      this.parentNode.parentNode.remove();
+      checkTodosAmount();
     });
   }
 };
@@ -110,9 +114,7 @@ const addDoneTodoOption = () => {
       const todoText = this.parentNode.parentNode.children[0].children[0].textContent;
       let todos = Array.from(JSON.parse(localStorage.getItem("todos")));
       todos.forEach(todo => {
-        if (todo.text === todoText) {
-            todo.done = true;
-        }
+        if (todo.text === todoText) todo.done = true;
       });
       localStorage.setItem("todos", JSON.stringify(todos));
     });
@@ -146,14 +148,6 @@ function filterTodos(event) {
     }
   });
 }
-
-const loading = (miliseconds) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, miliseconds);
-  });
-};
 
 formBtn.addEventListener("click", async(event) => {
   event.preventDefault();

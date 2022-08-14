@@ -118,6 +118,11 @@ header {
   background: rgba(31, 38, 135, 0.37);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  max-height: 0;
+}
+
+.section-todo-production--list-item:first-of-type {
+  margin-top: 18px;
 }
 
 .section-todo-production--list-item-text {
@@ -165,12 +170,14 @@ button:hover {
 
 .show-todo {
   opacity: 1;
-  transition: all 0.8s;
+  transition: all 0.7s ease-in;
+  max-height: 18rem;
 }
 
 .removed-todo {
   opacity: 0;
-  transition: all 0.8s;
+  transition: all 0.7s ease-out;
+  max-height: 0;
 }
 
 .invisible {
