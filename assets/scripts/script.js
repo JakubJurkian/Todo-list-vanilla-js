@@ -98,7 +98,7 @@ const addDeleteTodoOption = () => {
       });
       localStorage.setItem("todos", JSON.stringify(todos));
 
-      await loading(750);
+      await loading(600);
       this.parentNode.parentNode.remove();
       checkTodosAmount();
     });

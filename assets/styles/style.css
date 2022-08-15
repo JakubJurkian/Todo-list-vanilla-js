@@ -59,6 +59,11 @@ header {
   color: #24243e;
   border: none;
   outline: none;
+  transition: all 0.5s;
+}
+
+.section-todo-creation--form-input:focus {
+  transform: scale(1.04);
 }
 
 .section-todo-creation--form-btn {
@@ -170,7 +175,7 @@ button:hover {
 
 .show-todo {
   opacity: 1;
-  transition: all 1.1s ease-in;
+  transition: all 1s ease-in;
   max-height: 999rem;
 }
 
