@@ -12,8 +12,8 @@ if (!localStorage.todos) {
 
 const createNewTodoElement = async(text) => {
   const newLi = document.createElement("li");
-  const newDivWithText = document.createElement("div");
-  const newDivWithBtns = document.createElement("div");
+  const newDivForText = document.createElement("div");
+  const newDivForBtns = document.createElement("div");
   const newH2 = document.createElement("h2");
   const newDeleteBtn = document.createElement("button");
   const newDoneBtn = document.createElement("button");
@@ -21,8 +21,8 @@ const createNewTodoElement = async(text) => {
   const newImgCheckMark = document.createElement("img");
 
   newLi.classList.add("section-todo-production--list-item");
-  newDivWithText.classList.add("section-todo-production--list-item-text");
-  newDivWithBtns.classList.add("section-todo-production--list-item-btns");
+  newDivForText.classList.add("section-todo-production--list-item-text");
+  newDivForBtns.classList.add("section-todo-production--list-item-btns");
   newDeleteBtn.classList.add("delete-btn");
   newDoneBtn.classList.add("done-btn");
 
@@ -36,9 +36,9 @@ const createNewTodoElement = async(text) => {
   newH2.append(text);
   newDeleteBtn.append(newImgX);
   newDoneBtn.append(newImgCheckMark);
-  newDivWithText.append(newH2);
-  newDivWithBtns.append(newDeleteBtn, newDoneBtn);
-  newLi.append(newDivWithText, newDivWithBtns);
+  newDivForText.append(newH2);
+  newDivForBtns.append(newDeleteBtn, newDoneBtn);
+  newLi.append(newDivForText, newDivForBtns);
   todoList.append(newLi);
 
   newLi.scrollIntoView();
