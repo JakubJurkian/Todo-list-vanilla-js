@@ -182,10 +182,6 @@ button:hover {
   transition: all 0.6s;
 }
 
-.invisible {
-  display: none;
-}
-
 .finished-todo {
   background-color: rgba(77, 255, 0, 0.2);
   transition: all 0.8s;
@@ -206,6 +202,16 @@ button:hover {
 .empty-todo-list-text {
   text-align: center;
   font-size: 20px;
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.remove-opacity {
+  opacity: 0;
+}
+
+.invisible {
+  display: none;
 }
 
 .empty-input {
@@ -401,7 +407,7 @@ img {
   }
 
   .section-todo-production--list-item-btns button {
-    padding: 26px 16px 26px 16px;
+    padding: 30px;
   }
   .section-todo-production--list-item-text {
     font-size: 20px;

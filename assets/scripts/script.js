@@ -77,9 +77,14 @@ const loading = (miliseconds) => {
   });
 };
 
-const checkTodosAmount = () => {
+const checkTodosAmount = async() => {
   const todos = document.querySelectorAll(".section-todo-production--list-item");
-  if (todos.length === 0) emptyTodoListText.classList.remove("invisible");
+  if (todos.length === 0) {
+    emptyTodoListText.classList.add('remove-opacity');
+    emptyTodoListText.classList.remove("invisible");
+    await loading(200);
+    emptyTodoListText.classList.remove('remove-opacity');
+  }
 };
 
 const addDeleteTodoOption = () => {
@@ -178,8 +183,13 @@ formBtn.addEventListener("click", async(event) => {
     todoAlreadyExistsParagraph.classList.add('show');
     return;
   }
+  if (!emptyTodoListText.classList.contains('invisible')) {
+    emptyTodoListText.classList.add('remove-opacity');
+    await loading(300);
+    emptyTodoListText.classList.remove('remove-opacity');
+    emptyTodoListText.classList.add("invisible");
+  }
 
-  emptyTodoListText.classList.add("invisible");
   createNewTodoElement(todoText);
   addDeleteTodoOption();
   addDoneTodoOption();
