@@ -10,39 +10,48 @@ if (!localStorage.todos) {
   localStorage.setItem("todos", "[]");
 }
 
-const createNewTodoElement = async(text) => {
-  const newLi = document.createElement("li");
-  const newDivForText = document.createElement("div");
-  const newDivForBtns = document.createElement("div");
-  const newH2 = document.createElement("h2");
-  const newDeleteBtn = document.createElement("button");
-  const newDoneBtn = document.createElement("button");
-  const newImgX = document.createElement("img");
-  const newImgCheckMark = document.createElement("img");
+const createTodoElement = (text, done = false) => {
+  const li = document.createElement("li");
+  li.classList.add("section-todo-production--list-item", "show-todo", done ? "finished-todo" : 'l');
 
-  newLi.classList.add("section-todo-production--list-item");
-  newDivForText.classList.add("section-todo-production--list-item-text");
-  newDivForBtns.classList.add("section-todo-production--list-item-btns");
-  newDeleteBtn.classList.add("delete-btn");
-  newDoneBtn.classList.add("done-btn");
+  const divForTextContent = document.createElement('div');
+  divForTextContent.classList.add('section-todo-production--list-item-text');
+  const h2 = document.createElement('h2');
+  h2.textContent = text;
+  divForTextContent.appendChild(h2);
+  li.appendChild(divForTextContent);
 
-  newImgX.src = "./assets/images/x.svg";
-  newImgX.width = "24";
-  newImgX.alt = "x";
-  newImgCheckMark.src = "./assets/images/check-mark.svg";
-  newImgCheckMark.width = "24";
-  newImgCheckMark.alt = "check-mark";
+  const divForBtns = document.createElement('div');
+  divForBtns.classList.add('section-todo-production--list-item-btns');
 
-  newH2.append(text);
-  newDeleteBtn.append(newImgX);
-  newDoneBtn.append(newImgCheckMark);
-  newDivForText.append(newH2);
-  newDivForBtns.append(newDeleteBtn, newDoneBtn);
-  newLi.append(newDivForText, newDivForBtns);
-  todoList.append(newLi);
+  const deleteBtn = document.createElement('button');
+  deleteBtn.classList.add('delete-btn');
+  const deleteImg = document.createElement('img');
+  deleteImg.setAttribute('src', './assets/images/x.svg');
+  deleteImg.setAttribute('alt', 'x');
+  deleteImg.setAttribute('width', '24');
+  deleteBtn.appendChild(deleteImg);
 
-  newLi.scrollIntoView();
+  const doneBtn = document.createElement('button');
+  doneBtn.classList.add('done-btn');
+  const doneImg = document.createElement('img');
+  doneImg.setAttribute('src', './assets/images/check-mark.svg');
+  doneImg.setAttribute('alt', 'check-mark');
+  doneImg.setAttribute('width', '24');
+  doneBtn.appendChild(doneImg);
+
+  divForBtns.appendChild(deleteBtn);
+  divForBtns.appendChild(doneBtn);
+  li.appendChild(divForBtns);
+
+  return li;
+}
+
+const createTodo = async(text) => {
+  const newLi = createTodoElement(text);
   newLi.classList.add("show-todo");
+  todoList.append(newLi);
+  newLi.scrollIntoView({ behavior: "smooth"});
 
   localStorage.setItem("todos", JSON.stringify([...JSON.parse(localStorage.getItem("todos") || "[]"), { text: text, done: false }]));
 };
@@ -53,41 +62,7 @@ function loadTodos() {
   let todos = Array.from(JSON.parse(localStorage.getItem('todos')));
 
   todos.forEach(todo => {
-    const li = document.createElement('li');
-    //replaced li.innerHTML with the code below: 
-    li.classList.add(`section-todo-production--list-item`, todo.done ? 'finished-todo' : 'l', 'show-todo');
-    const listItemText = document.createElement('div');
-    listItemText.classList.add('section-todo-production--list-item-text');
-  
-    const h2 = document.createElement('h2');
-    h2.textContent = todo.text;
-  
-    listItemText.appendChild(h2);
-    li.appendChild(listItemText);
-  
-    const listItemBtns = document.createElement('div');
-    listItemBtns.classList.add('section-todo-production--list-item-btns');
-  
-    const deleteBtn = document.createElement('button');
-    deleteBtn.classList.add('delete-btn');
-    const deleteImg = document.createElement('img');
-    deleteImg.setAttribute('src', './assets/images/x.svg');
-    deleteImg.setAttribute('alt', 'x');
-    deleteImg.setAttribute('width', '24');
-    deleteBtn.appendChild(deleteImg);
-  
-    const doneBtn = document.createElement('button');
-    doneBtn.classList.add('done-btn');
-    const doneImg = document.createElement('img');
-    doneImg.setAttribute('src', './assets/images/check-mark.svg');
-    doneImg.setAttribute('alt', 'check-mark');
-    doneImg.setAttribute('width', '24');
-    doneBtn.appendChild(doneImg);
-  
-    listItemBtns.appendChild(deleteBtn);
-    listItemBtns.appendChild(doneBtn);
-    li.appendChild(listItemBtns);
-  
+    const li = createTodoElement(todo.text, todo.done);
     todoList.appendChild(li);
   });
 
@@ -133,7 +108,7 @@ const addDeleteTodoOption = () => {
       });
       localStorage.setItem("todos", JSON.stringify(todos));
 
-      await loading(600);
+      await loading(500);
       this.parentNode.parentNode.remove();
       checkTodosAmount();
     });
@@ -158,17 +133,19 @@ const addDoneTodoOption = () => {
 
 function filterTodos(event) {
   const todos = todoList.childNodes;
+  let i = 0;
   todos.forEach((todo) => {
-    console.log(todo);
     if (todo.nodeName === "LI" ) {
       if(todo.classList.contains('section-todo-production--list-item')) {
       switch (event.target.value) {
         case "all-todos":
           todo.style.display = "flex";
+          i++;
           break;
         case "done-todos":
           if (todo.classList.contains("finished-todo")) {
             todo.style.display = "flex";
+            i++;
           } else {
             todo.style.display = "none";
           }
@@ -179,12 +156,24 @@ function filterTodos(event) {
             todo.style.display = "none";
           } else {
             todo.style.display = "flex";
+            i++;
           }
           break;
       }
     }
-    }
+  }
+
+  if (i === 0) {
+    emptyTodoListElement.classList.remove("invisible");
+    emptyTodoListElement.classList.remove('hide');
+  }
+  else {
+    emptyTodoListElement.classList.add('hide');
+    emptyTodoListElement.classList.add("invisible");
+  }
+
   });
+
 }
 
 formBtn.addEventListener("click", async(event) => {
@@ -217,13 +206,13 @@ formBtn.addEventListener("click", async(event) => {
     return;
   }
   if (!emptyTodoListElement.classList.contains('invisible')) {
-    emptyTodoListElement.classList.add('remove-opacity');
+    emptyTodoListElement.classList.add('hide');
     await loading(300);
-    emptyTodoListElement.classList.remove('remove-opacity');
+    emptyTodoListElement.classList.remove('hide');
     emptyTodoListElement.classList.add("invisible");
   }
 
-  createNewTodoElement(todoText);
+  createTodo(todoText);
   addDeleteTodoOption();
   addDoneTodoOption();
 });

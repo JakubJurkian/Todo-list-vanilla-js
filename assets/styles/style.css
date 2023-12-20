@@ -177,18 +177,18 @@ button:hover {
 }
 
 .show-todo {
+  animation: fade 0.5s ease-in-out;
   opacity: 1;
-  transition: all 1s ease-in;
 }
 
 .removed-todo {
   opacity: 0;
-  transition: all 0.6s;
+  transition: all 0.5s;
 }
 
 .finished-todo {
   background-color: rgba(77, 255, 0, 0.2);
-  transition: all 0.8s;
+  transition: all 0.7s;
 }
 
 .finished-todo h2 {
@@ -205,7 +205,7 @@ button:hover {
 
 .empty-todo-list-element {
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   opacity: 1;
   transition: all 0.3s;
 }
@@ -417,11 +417,20 @@ img {
     font-size: 20px;
   }
   .empty-todo-list-element {
-    font-size: 26px;
+    font-size: 20px;
   }
   .empty-input,
   .already-exists-todo {
     left: 280px;
     font-size: 24px;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
