@@ -2,7 +2,7 @@ const formInput = document.querySelector(".section-todo-creation--form-input");
 const formBtn = document.querySelector(".section-todo-creation--form-btn");
 const todosFilter = document.querySelector(".section-todo-filter--form-select");
 const todoList = document.querySelector(".section-todo-production--list");
-const emptyTodoListText = document.querySelector(".empty-todo-list-text");
+const emptyTodoListElement = document.querySelector(".empty-todo-list-element");
 const errorParagraph = document.querySelector(".empty-input");
 const todoAlreadyExistsParagraph = document.querySelector(".already-exists-todo");
 
@@ -49,22 +49,48 @@ const createNewTodoElement = async(text) => {
 
 function loadTodos() {
   if (JSON.parse(localStorage.getItem('todos') === '[]')) return;
-  emptyTodoListText.classList.add("invisible");
+  emptyTodoListElement.classList.add("invisible");
   let todos = Array.from(JSON.parse(localStorage.getItem('todos')));
 
   todos.forEach(todo => {
     const li = document.createElement('li');
+    //replaced li.innerHTML with the code below: 
     li.classList.add(`section-todo-production--list-item`, todo.done ? 'finished-todo' : 'l', 'show-todo');
-    li.innerHTML = `
-    <div class="section-todo-production--list-item-text">
-      <h2>${todo.text}</h2>
-    </div>
-    <div class="section-todo-production--list-item-btns">
-      <button class="delete-btn"><img src="./assets/images/x.svg" alt="x" width="24" /></button>
-      <button class="done-btn"><img src="./assets/images/check-mark.svg" alt="check-mark" width="24" /></button>
-    </div>`;
-    todoList.append(li);
+    const listItemText = document.createElement('div');
+    listItemText.classList.add('section-todo-production--list-item-text');
+  
+    const h2 = document.createElement('h2');
+    h2.textContent = todo.text;
+  
+    listItemText.appendChild(h2);
+    li.appendChild(listItemText);
+  
+    const listItemBtns = document.createElement('div');
+    listItemBtns.classList.add('section-todo-production--list-item-btns');
+  
+    const deleteBtn = document.createElement('button');
+    deleteBtn.classList.add('delete-btn');
+    const deleteImg = document.createElement('img');
+    deleteImg.setAttribute('src', './assets/images/x.svg');
+    deleteImg.setAttribute('alt', 'x');
+    deleteImg.setAttribute('width', '24');
+    deleteBtn.appendChild(deleteImg);
+  
+    const doneBtn = document.createElement('button');
+    doneBtn.classList.add('done-btn');
+    const doneImg = document.createElement('img');
+    doneImg.setAttribute('src', './assets/images/check-mark.svg');
+    doneImg.setAttribute('alt', 'check-mark');
+    doneImg.setAttribute('width', '24');
+    doneBtn.appendChild(doneImg);
+  
+    listItemBtns.appendChild(deleteBtn);
+    listItemBtns.appendChild(doneBtn);
+    li.appendChild(listItemBtns);
+  
+    todoList.appendChild(li);
   });
+
   addDoneTodoOption();
   addDeleteTodoOption();
 }
@@ -80,10 +106,14 @@ const loading = (miliseconds) => {
 const checkTodosAmount = async() => {
   const todos = document.querySelectorAll(".section-todo-production--list-item");
   if (todos.length === 0) {
-    emptyTodoListText.classList.add('remove-opacity');
-    emptyTodoListText.classList.remove("invisible");
+    emptyTodoListElement.classList.add('hide');
+    emptyTodoListElement.classList.remove("invisible");
     await loading(200);
-    emptyTodoListText.classList.remove('remove-opacity');
+    emptyTodoListElement.classList.remove('hide');
+  }
+  else {
+    emptyTodoListElement.classList.remove('hide');
+    emptyTodoListElement.classList.add("invisible");
   }
 };
 
@@ -129,7 +159,9 @@ const addDoneTodoOption = () => {
 function filterTodos(event) {
   const todos = todoList.childNodes;
   todos.forEach((todo) => {
-    if (todo.nodeName === "LI") {
+    console.log(todo);
+    if (todo.nodeName === "LI" ) {
+      if(todo.classList.contains('section-todo-production--list-item')) {
       switch (event.target.value) {
         case "all-todos":
           todo.style.display = "flex";
@@ -150,6 +182,7 @@ function filterTodos(event) {
           }
           break;
       }
+    }
     }
   });
 }
@@ -183,11 +216,11 @@ formBtn.addEventListener("click", async(event) => {
     todoAlreadyExistsParagraph.classList.add('show');
     return;
   }
-  if (!emptyTodoListText.classList.contains('invisible')) {
-    emptyTodoListText.classList.add('remove-opacity');
+  if (!emptyTodoListElement.classList.contains('invisible')) {
+    emptyTodoListElement.classList.add('remove-opacity');
     await loading(300);
-    emptyTodoListText.classList.remove('remove-opacity');
-    emptyTodoListText.classList.add("invisible");
+    emptyTodoListElement.classList.remove('remove-opacity');
+    emptyTodoListElement.classList.add("invisible");
   }
 
   createNewTodoElement(todoText);
